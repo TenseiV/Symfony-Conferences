@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Comment
 {
     #[ORM\Id]
@@ -13,13 +15,19 @@ class Comment
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    
+
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private $author;
 
     #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank]
     private $text;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Email]
     private $email;
 
     #[ORM\Column(type: 'datetime_immutable')]
@@ -113,4 +121,11 @@ class Comment
     {
         return (string) $this->getEmail();
     }
+
+        #[ORM\PrePersist]
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
 }
