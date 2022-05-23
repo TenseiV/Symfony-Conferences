@@ -16,7 +16,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private $yes;
+    private $username;
 
     #[ORM\Column(type: 'json')]
     private $roles = [];
@@ -29,14 +29,14 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getYes(): ?string
+    public function getUsername(): ?string
     {
-        return $this->yes;
+        return $this->username;
     }
 
-    public function setYes(string $yes): self
+    public function setUsername(string $username): self
     {
-        $this->yes = $yes;
+        $this->username = $username;
 
         return $this;
     }
@@ -48,7 +48,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->yes;
+        return (string) $this->username;
     }
 
     /**
@@ -93,4 +93,10 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+        public function __toString(): string
+    {
+        return $this->username;
+    }
+
 }
