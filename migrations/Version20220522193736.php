@@ -23,9 +23,9 @@ final class Version20220522193736 extends AbstractMigration
         $this->addSql('DROP INDEX uniq_880e0d7675e735a9');
         $this->addSql('ALTER TABLE admin RENAME COLUMN yes TO username');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_880E0D76F85E0677 ON admin (username)');
-        $this->addSql("INSERT INTO admin (id, username, roles, password) \
-        VALUES (nextval('admin_id_seq'), 'admin', '[\"ROLE_ADMIN\"]', \
-        '\$argon2id\$v=19\$m=65536,t=4,p=1\$BQG+jovPcunctc30xG5PxQ\$TiGbx451NKdo+g9vLtfkMy4KjASKSOcnNxjij4gTX1s')");
+         $this->addSql("INSERT INTO admin (id, username, roles, password) \
+         VALUES (nextval('admin_id_seq'), 'admin', '[\"ROLE_ADMIN\"]', \
+         '\$argon2id\$v=19\$m=65536,t=4,p=1\$BQG+jovPcunctc30xG5PxQ\$TiGbx451NKdo+g9vLtfkMy4KjASKSOcnNxjij4gTX1s')");
     }
 
     public function down(Schema $schema): void
